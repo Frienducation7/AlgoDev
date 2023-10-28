@@ -1,9 +1,28 @@
-bool isValid(vector<int> &arr, int pages, int m)
+#include <vector>
+bool isValid(std::vector<int> &arr, int pages, int m)
 {
-    // complete this
+    int students = 1;
+    int pages_allocated = 0;
+
+    for(int i = 0; i< arr.size(); i++){
+        if (arr[i]>pages){
+            return false;
+        }
+        if(pages_allocated + arr[i] > pages){
+            students++;
+            pages_allocated = arr[i];
+
+            if(students > m){
+                return false;
+            }
+        }else{
+            pages_allocated += arr[i];
+        }
+    } 
+    return true;
 }
 
-int findPages(vector<int> &arr, int n, int m)
+int findPages(std::vector<int> &arr, int n, int m)
 {
 
     // if students (m) > books(n)
@@ -12,7 +31,8 @@ int findPages(vector<int> &arr, int n, int m)
         return -1;
     }
 
-    int low = *max_element(arr.begin(), arr.end());
+    int low = 
+    *std::max_element(arr.begin(), arr.end());
 
     int high = 0, ans = -1;
 
