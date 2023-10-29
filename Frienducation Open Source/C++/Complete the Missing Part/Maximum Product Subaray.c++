@@ -1,3 +1,4 @@
+
 class Solution
 {
 public:
@@ -23,7 +24,6 @@ public:
             prefixPro = max(prefixPro, 1);
             suffixPro = max(suffixPro, 1);
 
-            
             maxPro = max(maxPro, prefixPro);
         }
 
