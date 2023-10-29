@@ -1,19 +1,22 @@
 // Question link:https://leetcode.com/problems/maximum-product-subarray/description/
-class Solution
-{
+#include<iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
 public:
-    int maxProduct(vector<int> &nums)
-    {
-
-        int maxPro = INT_MIN, prefixPro = 1, suffixPro = 1;
-
-        int n = nums.size();
-
-        for (int i = 0; i < n; i++)
-        {
-
-            // complete
+    int maxProduct(vector<int>& nums) {
+        int maximum = nums[0];
+        int minimum = nums[0];
+        int ans = nums[0];
+        for(int i = 1;i < nums.size();i++){
+            if(nums[i] < 0){
+                swap(maximum,minimum);
+            }
+            maximum = max(nums[i],maximum*nums[i]);
+            minimum = min(nums[i],minimum*nums[i]);
+            ans = max(ans,maximum);
         }
-        return maxPro;
+        return ans;
     }
 };
