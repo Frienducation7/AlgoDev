@@ -1,11 +1,13 @@
 // Question link: https://leetcode.com/problems/combination-sum/
 
+#include <vector>
+
 class Solution
 {
 public:
-    vector<vector<int>> res;
+    std::vector<std::vector<int>> res;
 
-    void combi(vector<int> &candidates, int target, int index, vector<int> &temp)
+    void combi(std::vector<int> &candidates, int target, int index, std::vector<int> &temp)
     {
         if (index == candidates.size())
         {
@@ -16,13 +18,20 @@ public:
             return;
         }
 
-        // complete
+        // Include the current candidate value.
+        if (candidates[index] <= target) {
+            temp.push_back(candidates[index]);
+            combi(candidates, target - candidates[index], index, temp);
+            temp.pop_back(); // Backtrack to explore other possibilities.
+        }
+
+        // Skip the current candidate and move to the next one.
+        combi(candidates, target, index + 1, temp);
     }
 
-    vector<vector<int>> combinationSum(vector<int> &candidates, int target)
+    std::vector<std::vector<int>> combinationSum(std::vector<int> &candidates, int target)
     {
-
-        vector<int> temp;
+        std::vector<int> temp;
 
         int n = candidates.size();
 
