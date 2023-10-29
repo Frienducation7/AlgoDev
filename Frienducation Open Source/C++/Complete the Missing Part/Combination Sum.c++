@@ -38,4 +38,3 @@ public:
         return res;
     }
 };
-
