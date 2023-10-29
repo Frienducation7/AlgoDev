@@ -1,5 +1,4 @@
 #include <vector>
-using namespace std;
 
 class Solution
 {
@@ -17,15 +16,14 @@ public:
             return;
         }
 
-        // Include the current candidate value and continue the search
-        if (candidates[index] <= target)
-        {
+        // Include the current candidate value.
+        if (candidates[index] <= target) {
             temp.push_back(candidates[index]);
             combi(candidates, target - candidates[index], index, temp);
-            temp.pop_back(); // Backtrack by removing the last element
+            temp.pop_back(); // Backtrack to explore other possibilities.
         }
 
-        // Skip the current candidate and continue the search
+        // Skip the current candidate and move to the next one.
         combi(candidates, target, index + 1, temp);
     }
 
@@ -33,9 +31,10 @@ public:
     {
         vector<int> temp;
 
+        int n = candidates.size();
+
         combi(candidates, target, 0, temp);
 
         return res;
     }
 };
-
