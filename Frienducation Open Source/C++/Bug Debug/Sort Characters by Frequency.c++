@@ -1,40 +1,31 @@
 // Question Link: https://leetcode.com/problems/sort-characters-by-frequency/
-class Solution
-{
+class Solution {
 public:
-    string frequencySort(string s)
-    {
-
-        string res = "";
-
-        map<char, int> mp;
-
-        priority_queue<pair<int, char>> pq;
-
-        int n = s.length();
-        for (int i = 0; i < n; i++)
-        {
+    string frequencySort(string s) {
+        
+        // Count the frequency 
+        unordered_map<char,int> mp;
+        for(int i= 0;i< s.length(); i++){
             mp[s[i]]++;
         }
-
-        for (auto e : mp)
-        {
-            // check
-            pq.push({e.first, e.second});
+        
+        // priority queue will maintain the decreasing order 
+        priority_queue<pair<int,char>>pq;
+        for(auto i : mp){
+            pq.push({i.second,i.first});
         }
-
-        while (!pq.empty())
-        {
-
-            pair<int, char> p = pq.top();
-            // add
-
-            while (p.first++)
-            {
-                res += p.second;
+        
+        // Generate the required answer 
+        string ans = "";
+        while(!pq.empty()){
+            
+            pair<int,char> p = pq.top();
+            pq.pop();
+            
+            while(p.first--){
+                ans+=p.second;
             }
         }
-
-        return res;
+        return ans ;
     }
 };
