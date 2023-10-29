@@ -2,7 +2,6 @@
 #include <vector>
 
 bool isValid(std::vector<int> &arr, int pages, int m){
-    // ... your existing code ...
     int current_student = 0;
     int pages_allocated = 0;
 
@@ -27,8 +26,6 @@ bool isValid(std::vector<int> &arr, int pages, int m){
     } 
     return true;
 }
-
-
 int main() {
     std::vector<int> arr = {1, 2, 3, 4, 5}; // replace with your own input values
     int pages = 5; // replace with your own input value
