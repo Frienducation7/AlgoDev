@@ -1,44 +1,43 @@
 // Question Link: https://leetcode.com/problems/4sum/
 
-class Solution
-{
+class Solution {
 public:
-    vector<vector<int>> fourSum(vector<int> &nums, int target)
-    {
-
-        int left, right, i, j, cnt = 0;
-
+    vector<vector<int>> fourSum(vector<int> &nums, int target) {
         vector<vector<int>> ans;
-
         sort(nums.begin(), nums.end());
 
-        for (i = 0; i < nums.size(); i++)
-        {
-            for (j = i + 1; j < nums.size(); j++)
-            {
+        for (int i = 0; i < nums.size(); i++) {
+            for (int j = i + 1; j < nums.size(); j++) {
+                int left = j + 1;
+                int right = nums.size() - 1;
 
-                left = j + 1;
-                right = nums.size() - 1;
+                while (left < right) {
+                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
 
-                while (left < right)
-                {
-                    if (nums[left] + nums[right] == target - (nums[i] + nums[j]))
-                    {
-                        // complete
+                    if (sum == target) {
+                        // Found a valid quadruplet, add it to ans
+                        ans.push_back({nums[i], nums[j], nums[left], nums[right]});
+
+                        // Update left and right pointers
+                        left++;
+                        right--;
+
+                        // Skip duplicates
+                        while (left < right && nums[left] == nums[left - 1]) left++;
+                        while (left < right && nums[right] == nums[right + 1]) right--;
+                    } else if (sum < target) {
+                        left++;
+                    } else {
+                        right--;
                     }
-                    else if (nums[left] + nums[right] > target - (nums[i] + nums[j]))
-                    {
-                        //  complete
-                    }
-                    else
-                    // complete
                 }
 
-                while (j + 1 < nums.size() && nums[j] == nums[j + 1])
-                    j++;
+                // Skip duplicate values of j
+                while (j + 1 < nums.size() && nums[j] == nums[j + 1]) j++;
             }
-            while (i + 1 < nums.size() && nums[i] == nums[i + 1])
-                i++;
+
+            // Skip duplicate values of i
+            while (i + 1 < nums.size() && nums[i] == nums[i + 1]) i++;
         }
 
         return ans;
