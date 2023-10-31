@@ -1,7 +1,37 @@
-class Solution {
-    public int majorityElement(int[] nums) {
-        Arrays.sort(nums);
-        int n = nums.length;
-        return nums[n/2];
+public class MajorityElement {
+    public static int findMajorityElement(int[] nums) {
+        int candidate = 0, count = 0;
+
+        for (int num : nums) {
+            if (count == 0) {
+                candidate = num;
+                count = 1;
+            } else if (candidate == num) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+
+        // Validate if the candidate is the majority element
+        count = 0;
+        for (int num : nums) {
+            if (num == candidate) {
+                count++;
+            }
+        }
+
+        return count > nums.length / 2 ? candidate : -1; // -1 indicates no majority element
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {3, 3, 4, 2, 4, 4, 2, 4, 4};
+        int result = findMajorityElement(nums);
+
+        if (result != -1) {
+            System.out.println("Majority Element: " + result);
+        } else {
+            System.out.println("No Majority Element");
+        }
     }
 }
